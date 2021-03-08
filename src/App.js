@@ -1,25 +1,48 @@
-import logo from './logo.svg';
+import React from 'react';
+import {
+    BrowserRouter,
+    Switch,
+    Route,
+    Link
+} from 'react-router-dom';
+import './helpers/react-seen-it-firebase-sdk';
 import './App.css';
+import Header from "./components/common/Header";
+import IndexPage from "./components/home/IndexPage";
+import './styles/site.css';
+import Logout from "./components/user/Logout";
+import PostContainer from "./components/posts/PostContainer";
+import CreatePost from "./components/posts/CreatePost";
+import "./styles/post.css";
+import "./styles/submit.css"
 
 function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
+    return (
+        <BrowserRouter>
+            <div className="App">
+                <div id="container">
+                    <Header/>
+
+                    <Switch>
+                        <Route path="/logout">
+                            <Logout/>
+                        </Route>
+
+                        <Route path="/posts">
+                            <PostContainer/>
+                        </Route>
+                        <Route path="/create-post">
+                            <CreatePost/>
+                        </Route>
+                        <Route exact path="/">
+                            <IndexPage/>
+                        </Route>
+                    </Switch>
+
+                </div>
+            </div>
+        </BrowserRouter>
+    );
 }
 
 export default App;
