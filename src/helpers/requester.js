@@ -6,6 +6,7 @@ import storage from "./storage";
 const makeRequest = async function (method, collection, data) {
     const authToken = JSON.parse(storage.getData('userInfo')).stsTokenManager.accessToken;
 
+    debugger;
     if(authToken){
         const reqData = {
             method: method,

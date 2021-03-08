@@ -1,6 +1,7 @@
 import React from "react";
 import requester from "../../helpers/requester";
 import Post from "./Post";
+import Navigation from "../common/Navigation";
 
 
 export default class PostContainer extends React.Component {
@@ -15,22 +16,24 @@ export default class PostContainer extends React.Component {
 
     getAllPosts() {
         const collection = 'posts';
-        return requester.get(collection).then(res => res.json().then(data=>data));
+        return requester.get(collection).then(res => res.json());
     }
 
     componentDidMount() {
         this.getAllPosts().then(allPosts => {
             this.setState({posts: allPosts})
-        });
+        })
+            .catch(error=>console.log(error));
 
     }
 
     render() {
         let allPostsSection = [];
+        debugger;
         this.state
             .posts
-            .map((post, index) => {
-                allPostsSection.push(<Post index={index} details={post}/>)
+            .forEach((post, index) => {
+                allPostsSection.push(<Post key={index} index={index} details={post}/>)
             })
         return (
             <section id="viewCatalog">

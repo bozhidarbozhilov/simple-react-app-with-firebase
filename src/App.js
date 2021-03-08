@@ -15,6 +15,7 @@ import PostContainer from "./components/posts/PostContainer";
 import CreatePost from "./components/posts/CreatePost";
 import "./styles/post.css";
 import "./styles/submit.css"
+import Navigation from "./components/common/Navigation";
 
 function App() {
     return (
@@ -22,7 +23,9 @@ function App() {
             <div className="App">
                 <div id="container">
                     <Header/>
-
+                    <div className="content">
+                        <Navigation/>
+                    </div>
                     <Switch>
                         <Route path="/logout">
                             <Logout/>

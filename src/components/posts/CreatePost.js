@@ -23,7 +23,8 @@ export default class CreatePost extends React.Component {
         const targetValue = target.type === 'checkbox' ? target.checked : target.value;
 
         this.setState({
-            [targetName]: targetValue
+            [targetName]: targetValue,
+            _kmd:{etc:new Date()}
         })
     }
 
