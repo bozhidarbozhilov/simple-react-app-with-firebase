@@ -26,9 +26,13 @@ export default class RegisterForm extends Component {
         event.preventDefault();
         firebaseAuth.registerUser(this.state)
             .then(res=>{
-                storage.saveUser(res);
-                observer.trigger(constants.EVENT_NAMES.loginUser, res);
-                this.setState(constants.USER_DEFAULT_STATE);
+                res.user.updateProfile({
+                    displayName: this.state.displayName
+                }).then(()=>{
+                    storage.saveUser(res);
+                    observer.trigger(constants.EVENT_NAMES.loginUser, res);
+                    this.setState(constants.USER_DEFAULT_STATE);
+                })
             })
             .catch(error=>console.log(error));
     }
@@ -37,6 +41,11 @@ export default class RegisterForm extends Component {
         return (
             <form id="registerForm" onSubmit={this.handleSubmit}>
                 <h2>Register</h2>
+                <label>Username:</label>
+                <input name="displayName"
+                       type="text"
+                       value={this.state.displayName}
+                       onChange={this.handleChange}/>
                 <label>Email:</label>
                 <input name="email"
                        type="text"

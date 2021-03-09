@@ -9,7 +9,7 @@ class Header extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
-            email: '',
+            displayName: '',
         }
     }
 
@@ -18,16 +18,16 @@ class Header extends React.Component {
     }
 
     loggedInUser = (res) => {
-        this.setState({email: res.user.email})
+        this.setState({displayName: res.user.displayName})
     }
 
     render() {
         return (
             <header>
                 <span className="logo">☃</span><span className="header">SeenIt</span>
-                {this.state.email
+                {this.state.displayName
                     ? <div id="profile">
-                        <span>{this.state.email}</span>|
+                        <span>{this.state.displayName}</span>|
                         <Link to="/logout">logout</Link>
                         </div>
                     : null}

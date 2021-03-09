@@ -1,6 +1,7 @@
 const constants = {
     BASE_URL: 'https://react-seen-it-default-rtdb.firebaseio.com/%s.json?auth=%s',
     USER_DEFAULT_STATE: {
+        displayName:'',
         email: '',
         password: '',
         repeatPass: ''

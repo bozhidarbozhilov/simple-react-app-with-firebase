@@ -38,7 +38,7 @@ export default class LoginForm extends Component {
         return (
             <form id="loginForm" onSubmit={this.handleSubmit}>
                 <h2>Sign In</h2>
-                <label>Username:</label>
+                <label>Email:</label>
                 <input name="email"
                        type="text"
                        value={this.state.email}
