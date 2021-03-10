@@ -12,13 +12,16 @@ export default class Welcome extends Component {
 
     render() {
         return (
-            <div className="welcome">
-                <div className="signup">
-                    <LoginForm />
-                    <RegisterForm />
+            <section id="viewWelcome">
+                <div className="welcome">
+                    <div className="signup">
+                        <LoginForm />
+                        <RegisterForm />
+                    </div>
+                    <About />
                 </div>
-                <About />
-            </div>
+            </section>
+
         );
     }
 }

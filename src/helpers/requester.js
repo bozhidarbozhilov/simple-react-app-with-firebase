@@ -6,7 +6,6 @@ import storage from "./storage";
 const makeRequest = async function (method, collection, data) {
     const authToken = JSON.parse(storage.getData('userInfo')).stsTokenManager.accessToken;
 
-    debugger;
     if(authToken){
         const reqData = {
             method: method,
@@ -17,7 +16,6 @@ const makeRequest = async function (method, collection, data) {
             reqData.body = JSON.stringify(data);
         }
         let url = constants.BASE_URL.replace('%s', collection).replace('%s',authToken);
-        console.log(url);
         return fetch(url, reqData);
     }
 

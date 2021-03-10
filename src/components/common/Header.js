@@ -1,7 +1,6 @@
 import React from "react";
 import {Link} from "react-router-dom";
 import "../../styles/header.css";
-import firebaseAuth from "../../helpers/firebase-auth";
 import observer from "../../helpers/observer";
 import constants from "../../helpers/constants";
 
@@ -11,10 +10,7 @@ class Header extends React.Component {
         this.state = {
             displayName: '',
         }
-    }
-
-    componentDidMount() {
-        observer.subscribe(constants.EVENT_NAMES.loginUser, this.loggedInUser);
+        observer.subscribe(constants.EVENT_NAMES.loginUser, this.loggedInUser)
     }
 
     loggedInUser = (res) => {

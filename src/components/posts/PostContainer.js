@@ -29,7 +29,6 @@ export default class PostContainer extends React.Component {
 
     render() {
         let allPostsSection = [];
-        debugger;
         this.state
             .posts
             .forEach((post, index) => {

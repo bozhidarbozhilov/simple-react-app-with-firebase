@@ -1,5 +1,6 @@
 import React from "react";
-import { Link } from "react-router-dom"
+import { Link } from "react-router-dom";
+import "../../styles/menu.css";
 
 export default class Navigation extends React.Component {
     constructor(props) {

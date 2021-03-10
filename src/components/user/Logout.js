@@ -12,7 +12,7 @@ export default class Logout extends React.Component {
     logout() {
         firebaseAuth
             .logoutUser()
-            .then(res=> {
+            .then(()=> {
                 console.log('user is signed out...')
                 storage.deleteUser();
             })
@@ -20,6 +20,7 @@ export default class Logout extends React.Component {
     }
 
     render() {
+        this.logout();
         return (
             <Redirect to="/"/>
         )
