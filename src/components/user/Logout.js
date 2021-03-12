@@ -1,7 +1,8 @@
 import React from "react";
-import { Redirect } from "react-router-dom";
+import {Redirect, Route} from "react-router-dom";
 import firebaseAuth from "../../helpers/firebase-auth";
 import storage from "../../helpers/storage";
+import IndexPage from "../home/IndexPage";
 
 export default class Logout extends React.Component {
     constructor(props) {
@@ -13,7 +14,6 @@ export default class Logout extends React.Component {
         firebaseAuth
             .logoutUser()
             .then(()=> {
-                console.log('user is signed out...')
                 storage.deleteUser();
             })
             .catch(error=>console.log(error));
@@ -22,7 +22,7 @@ export default class Logout extends React.Component {
     render() {
         this.logout();
         return (
-            <Redirect to="/"/>
+            <Redirect to={IndexPage}/>
         )
     }
 }

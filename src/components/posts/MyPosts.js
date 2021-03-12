@@ -1,9 +1,10 @@
 import React from "react";
 import requester from "../../helpers/requester";
 import Post from "./Post";
+import storage from "../../helpers/storage";
 
 
-export default class PostContainer extends React.Component {
+export default class MyPosts extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
@@ -20,7 +21,11 @@ export default class PostContainer extends React.Component {
 
     componentDidMount() {
         this.getAllPosts().then(allPosts => {
-            this.setState({posts: allPosts});
+            console.log(allPosts);
+            debugger;
+            //TODO fix filter
+            const myPosts=allPosts.filter(post=>post.authorId===JSON.parse(storage.getData('userInfo')).uid)
+            this.setState({posts: myPosts});
         })
             .catch(error => console.log(error));
 
@@ -37,6 +42,7 @@ export default class PostContainer extends React.Component {
         return (
             <section id="viewCatalog">
                 <div className="posts">
+                    <h1>All posts</h1>
                     {allPostsSection}
                 </div>
             </section>

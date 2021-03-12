@@ -7,7 +7,7 @@ export default class Post extends React.Component {
     }
 
     calcTime(dateIsoFormat) {
-        let diff = new Date - (new Date(dateIsoFormat));
+        let diff = new Date() - (new Date(dateIsoFormat));
         diff = Math.floor(diff / 60000);
         if (diff < 1) return 'less than a minute';
         if (diff < 60) return diff + ' minute' + pluralize(diff);
@@ -34,7 +34,8 @@ export default class Post extends React.Component {
                 <div className="col thumbnail">
                     <Link to={this.props.details.url}>
                         <img
-                            src={this.props.details.imageUrl}/>
+                            src={this.props.details.imageUrl}
+                        alt="site logo"/>
                     </Link>
                 </div>
                 <div className="post-content">
@@ -45,13 +46,13 @@ export default class Post extends React.Component {
                     </div>
                     <div className="details">
                         <div className="info">
-                            submitted {this.calcTime(this.props.details._kmd.ect)} ago by {this.props.details.author}
+                            submitted {this.calcTime(this.props.details.created)} ago by {this.props.details.author}
                         </div>
                         <div className="controls">
                             <ul>
                                 <li className="action"><Link className="commentsLink" to="#">comments</Link></li>
                                 <li className="action"><Link className="editLink" to="#">edit</Link></li>
-                                <li className="action"><Link className="deleteLink" to="#">delete</Link></li>
+                                <li className="action"><Link className="deleteLink" to="/my-posts">delete</Link></li>
                             </ul>
                         </div>
 

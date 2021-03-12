@@ -9,9 +9,6 @@ export default class CreatePost extends React.Component {
             title: '',
             imageUrl: '',
             description: '',
-            _kmd:{
-                etc:''
-            }
         }
         this.handleChange = this.handleChange.bind(this);
         this.handleSubmit = this.handleSubmit.bind(this);
@@ -24,7 +21,6 @@ export default class CreatePost extends React.Component {
 
         this.setState({
             [targetName]: targetValue,
-            _kmd:{etc:new Date()}
         })
     }
 
@@ -58,7 +54,7 @@ export default class CreatePost extends React.Component {
                                value={this.state.title}
                                onChange={this.handleChange}/>
                         <label>Link Thumbnail Image (optional):</label>
-                        <input name="image"
+                        <input name="imageUrl"
                                type="text"
                                value={this.state.imageUrl}
                                onChange={this.handleChange}/>
