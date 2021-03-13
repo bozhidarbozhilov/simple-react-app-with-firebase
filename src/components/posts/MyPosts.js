@@ -21,20 +21,18 @@ export default class MyPosts extends React.Component {
 
     componentDidMount() {
         this.getAllPosts().then(allPosts => {
-            console.log(allPosts);
-            debugger;
-            //TODO fix filter
-            const myPosts=allPosts.filter(post=>post.authorId===JSON.parse(storage.getData('userInfo')).uid)
-            this.setState({posts: myPosts});
+            this.setState({posts: allPosts});
         })
             .catch(error => console.log(error));
 
     }
 
     render() {
-        let allPostsSection = [];
-        Object.entries(this.state.posts).forEach((post,index)=> {
-            allPostsSection.push(<Post key={post[0]}
+        let myPostsSection = [];
+        Object.entries(this.state.posts)
+            .filter(post=>post[1].authorId===JSON.parse(storage.getData('userInfo')).uid)
+            .forEach((post,index)=> {
+            myPostsSection.push(<Post key={post[0]}
                                        index={index}
                                        details={post[1]}/>)
         });
@@ -42,8 +40,7 @@ export default class MyPosts extends React.Component {
         return (
             <section id="viewCatalog">
                 <div className="posts">
-                    <h1>All posts</h1>
-                    {allPostsSection}
+                    {myPostsSection}
                 </div>
             </section>
         )
