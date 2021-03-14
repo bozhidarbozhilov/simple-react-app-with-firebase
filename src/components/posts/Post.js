@@ -26,31 +26,43 @@ export default class Post extends React.Component {
     }
 
     render() {
+        const id = this.props.details[0];
+        const post = this.props.details[1];
         return (
             <article className="post">
-                <div className="col rank">
-                    <span>{this.props.index + 1}</span>
-                </div>
+                {this.props.index
+                    ?
+                    <div className="col rank">
+                        <span>{this.props.index}</span>
+                    </div>
+                    : null
+                }
+
                 <div className="col thumbnail">
-                    <Link to={this.props.details.url}>
+                    <Link to={post.url}>
                         <img
-                            src={this.props.details.imageUrl}
+                            src={post.imageUrl}
                         alt="site logo"/>
                     </Link>
                 </div>
                 <div className="post-content">
                     <div className="title">
-                        <Link to={this.props.details.url}>
-                            {this.props.details.title}
+                        <Link to={post.url}>
+                            {post.title}
                         </Link>
                     </div>
                     <div className="details">
                         <div className="info">
-                            submitted {this.calcTime(this.props.details.created)} ago by {this.props.details.author}
+                            submitted {this.calcTime(post.created)} ago by {post.author}
                         </div>
                         <div className="controls">
                             <ul>
-                                <li className="action"><Link className="commentsLink" to="#">comments</Link></li>
+                                { this.props.index
+                                    ?
+                                    <li className="action"><Link className="commentsLink" to={`/post-comments/${id}`}>comments</Link></li>
+                                    :
+                                    null
+                                }
                                 <li className="action"><Link className="editLink" to="#">edit</Link></li>
                                 <li className="action"><Link className="deleteLink" to="/my-posts">delete</Link></li>
                             </ul>

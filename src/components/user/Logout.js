@@ -22,7 +22,7 @@ export default class Logout extends React.Component {
     render() {
         this.logout();
         return (
-            <Redirect to={IndexPage}/>
+            <Redirect to="/"/>
         )
     }
 }

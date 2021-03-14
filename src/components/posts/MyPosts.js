@@ -11,30 +11,16 @@ export default class MyPosts extends React.Component {
             posts: {}
         }
 
-        this.getAllPosts = this.getAllPosts.bind(this);
-    }
-
-    getAllPosts() {
-        const collection = 'posts';
-        return requester.get(collection).then(res => res.json());
-    }
-
-    componentDidMount() {
-        this.getAllPosts().then(allPosts => {
-            this.setState({posts: allPosts});
-        })
-            .catch(error => console.log(error));
-
     }
 
     render() {
         let myPostsSection = [];
-        Object.entries(this.state.posts)
+        Object.entries(this.props.allPosts)
             .filter(post=>post[1].authorId===JSON.parse(storage.getData('userInfo')).uid)
             .forEach((post,index)=> {
             myPostsSection.push(<Post key={post[0]}
-                                       index={index}
-                                       details={post[1]}/>)
+                                       index={index+1}
+                                       details={post}/>)
         });
 
         return (
