@@ -1,5 +1,4 @@
 import React from "react";
-import requester from "../../helpers/requester";
 import Post from "./Post";
 
 
@@ -12,7 +11,7 @@ export default class PostContainer extends React.Component {
         let allPostsSection = [];
         Object.entries(this.props.allPosts).forEach((post,index)=> {
             allPostsSection.push(<Post key={post[0]}
-                                       index={index+1}
+                                       index={index + 1}
                                        details={post}/>)
         });
 

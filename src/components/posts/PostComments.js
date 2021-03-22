@@ -1,6 +1,5 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
-import requester from "../../helpers/requester";
 import Post from "./Post";
 
 export default class PostComments extends React.Component {
@@ -11,13 +10,10 @@ export default class PostComments extends React.Component {
     render() {
         const {postId} = this.props.match.params;
         const post = Object.entries(this.props.allPosts).filter(post=>post[0]===postId);
-        console.log(this.props.allPosts);
         console.log(post);
+        const postSection = <Post key={post[0][0]}
+                                  details={post[0]}/>;
 
-        const postSection = <Post key={post[0]}
-                                  details={post}/>;
-        console.log(postSection);
-        debugger;
         return(
             <section id="viewComments">
                 {postSection}

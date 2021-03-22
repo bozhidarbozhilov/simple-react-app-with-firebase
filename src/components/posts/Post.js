@@ -28,6 +28,7 @@ export default class Post extends React.Component {
     render() {
         const id = this.props.details[0];
         const post = this.props.details[1];
+        debugger;
         return (
             <article className="post">
                 {this.props.index
@@ -39,7 +40,7 @@ export default class Post extends React.Component {
                 }
 
                 <div className="col thumbnail">
-                    <Link to={post.url}>
+                    <Link to={this.props.details[1].url}>
                         <img
                             src={post.imageUrl}
                         alt="site logo"/>
