@@ -1,6 +1,6 @@
 import storage from "./storage";
 
-const refreshAuthToken = function () {
+const refreshAuthToken = async function () {
     const userInfo = JSON.parse(storage.getData('userInfo'));
     const url = `https://securetoken.googleapis.com/v1/token?key=${userInfo.apiKey}`;
     const reqData = {};
@@ -9,7 +9,11 @@ const refreshAuthToken = function () {
     reqData.headers['Content-Type'] = 'application/x-www-form-urlencoded';
 
     reqData.body=`grant_type=refresh_token&refresh_token=${userInfo.stsTokenManager.refreshToken}`;
-    fetch(url,reqData).then(res => res.json()).then(data => storage.saveData('authToken', data.access_token));
+
+    const response = await fetch(url,reqData);
+    const resJson = await response.json();
+    const token = await resJson.access_token;
+    return token;
 }
 
 export default refreshAuthToken;

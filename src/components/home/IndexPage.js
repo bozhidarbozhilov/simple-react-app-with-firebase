@@ -39,6 +39,7 @@ export default class IndexPage extends Component {
 
     componentDidMount() {
         this.getAllPosts().then(allPosts => {
+            console.log(allPosts);
             this.setState({allPosts: allPosts});
         })
             .catch(error => console.log(error));

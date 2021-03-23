@@ -3,6 +3,7 @@ import constants from "../../helpers/constants";
 import firebaseAuth from "../../helpers/firebase-auth";
 import storage from "../../helpers/storage";
 import observer from "../../helpers/observer";
+import refreshAuthToken from "../../helpers/refreshAuthToken";
 
 export default class LoginForm extends Component {
     constructor(props) {
@@ -25,13 +26,18 @@ export default class LoginForm extends Component {
     handleSubmit(event) {
         event.preventDefault();
         firebaseAuth.loginUser(this.state)
-            .then(res=>{
+            .then(res => {
+                console.log(res);
                 storage.saveUser(res);
                 observer.trigger(constants.EVENT_NAMES.loginUser, res);
                 this.setState(constants.USER_DEFAULT_STATE);
-
+                // refreshAuthToken()
+                //     .then(token => res.user.updateProfile({idToken: token})
+                //         .then(response => {
+                //             storage.saveUser(response);
+                //         }));
             })
-            .catch(error=>console.log(error));
+            .catch(error => console.log('error',error));
     }
 
     render() {
