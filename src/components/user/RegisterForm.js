@@ -30,7 +30,7 @@ export default class RegisterForm extends Component {
                     displayName: this.state.displayName
                 }).then(()=>{
                     storage.saveUser(res);
-                    observer.trigger(constants.EVENT_NAMES.loginUser, res);
+                    observer.trigger(constants.EVENT_NAMES.loginUser, res.user.displayName);
                     this.setState(constants.USER_DEFAULT_STATE);
                 })
             })

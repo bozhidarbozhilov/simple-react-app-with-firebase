@@ -1,6 +1,6 @@
 import storage from "./storage";
 
-const refreshAuthToken = async function () {
+const refreshAuthToken = async () => {
     const userInfo = JSON.parse(storage.getData('userInfo'));
     const url = `https://securetoken.googleapis.com/v1/token?key=${userInfo.apiKey}`;
     const reqData = {};

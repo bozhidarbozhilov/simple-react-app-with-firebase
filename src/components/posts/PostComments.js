@@ -11,10 +11,12 @@ export default class PostComments extends React.Component {
         this.state = {
             post: post[0],
             content: '',
+            comments: []
         }
 
         this.handleChange = this.handleChange.bind(this);
         this.handleSubmit = this.handleSubmit.bind(this);
+        this.getAllComments = this.getAllComments.bind(this);
     }
 
     handleChange(event) {
@@ -37,6 +39,18 @@ export default class PostComments extends React.Component {
         const collection = 'comments';
 
         requester.create(collection, payload).then(res=>console.log(res));
+    }
+
+    getAllComments() {
+        const collection = 'comments';
+        requester.get(collection).then(res=> {
+            console.log(res);
+            this.setState({comments: res});
+        });
+    }
+
+    componentDidMount() {
+        this.getAllComments()
     }
 
     render() {

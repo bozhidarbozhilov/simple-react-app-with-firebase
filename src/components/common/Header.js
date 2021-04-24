@@ -1,10 +1,13 @@
 import React from "react";
 import {Link} from "react-router-dom";
 import "../../styles/header.css";
+import constants from "../../helpers/constants";
+import observer from "../../helpers/observer";
 
 class Header extends React.Component {
     constructor(props) {
         super(props);
+
     }
 
     render() {

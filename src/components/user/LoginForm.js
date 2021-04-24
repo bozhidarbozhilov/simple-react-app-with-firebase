@@ -11,6 +11,7 @@ export default class LoginForm extends Component {
         this.state = constants.USER_DEFAULT_STATE;
         this.handleChange = this.handleChange.bind(this);
         this.handleSubmit = this.handleSubmit.bind(this);
+
     }
 
     handleChange(event) {
@@ -27,15 +28,11 @@ export default class LoginForm extends Component {
         event.preventDefault();
         firebaseAuth.loginUser(this.state)
             .then(res => {
-                console.log(res);
                 storage.saveUser(res);
-                observer.trigger(constants.EVENT_NAMES.loginUser, res);
+                observer.trigger(constants.EVENT_NAMES.loginUser, res.user.displayName);
                 this.setState(constants.USER_DEFAULT_STATE);
-                // refreshAuthToken()
-                //     .then(token => res.user.updateProfile({idToken: token})
-                //         .then(response => {
-                //             storage.saveUser(response);
-                //         }));
+                refreshAuthToken()
+                    .then(token=>console.log(token));
             })
             .catch(error => console.log('error',error));
     }

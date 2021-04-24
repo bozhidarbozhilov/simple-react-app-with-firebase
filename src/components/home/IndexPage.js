@@ -15,6 +15,7 @@ import constants from "../../helpers/constants";
 import MyPosts from "../posts/MyPosts";
 import PostComments from "../posts/PostComments";
 import requester from "../../helpers/requester";
+import firebaseAuth from "../../helpers/firebase-auth";
 
 
 export default class IndexPage extends Component {
@@ -24,13 +25,13 @@ export default class IndexPage extends Component {
             displayName: '',
             allPosts:{}
         }
-        observer.subscribe(constants.EVENT_NAMES.loginUser, this.loggedInUser);
         this.getAllPosts = this.getAllPosts.bind(this);
     }
 
-    loggedInUser = (res) => {
-        this.setState({displayName: res.user.displayName})
+    loggedInUser = (username) => {
+        this.setState({displayName: username});
     }
+
 
     getAllPosts() {
         const collection = 'posts';
@@ -38,8 +39,9 @@ export default class IndexPage extends Component {
     }
 
     componentDidMount() {
+        observer.subscribe(constants.EVENT_NAMES.loginUser, this.loggedInUser);
+
         this.getAllPosts().then(allPosts => {
-            console.log(allPosts);
             this.setState({allPosts: allPosts});
         })
             .catch(error => console.log(error));
@@ -50,14 +52,14 @@ export default class IndexPage extends Component {
         return (
             <BrowserRouter>
                 <div>
-                    <Header displayName={this.state.displayName}/>
+                    <Header isLoggedUser={this.loggedInUser} displayName={this.state.displayName}/>
                     <div className="content">
                         {this.state.displayName
                             ? <Navigation/>
                             : null
                         }
                         <Switch>
-                            <Route path="/logout" component={Logout}/>
+                            <Route path="/logout" render={()=>(<Logout loggedInUser={this.loggedInUser}/>)}/>
                             <Route path="/posts" render={()=>(<PostContainer allPosts={this.state.allPosts}/>)}/>
                             <Route path="/create-post" component={CreatePost}/>
                             <Route path="/my-posts" render={()=>(<MyPosts allPosts={this.state.allPosts}/>)}/>

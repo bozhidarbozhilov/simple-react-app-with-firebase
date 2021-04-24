@@ -15,10 +15,10 @@ export default class Welcome extends Component {
             <section id="viewWelcome">
                 <div className="welcome">
                     <div className="signup">
-                        <LoginForm />
-                        <RegisterForm />
+                        <LoginForm/>
+                        <RegisterForm/>
                     </div>
-                    <About />
+                    <About/>
                 </div>
             </section>
 
